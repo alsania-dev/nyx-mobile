@@ -17,17 +17,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'pnpm'
-
-      - name: Install dependencies
-        run: |
-          npm install -g pnpm
-          pnpm install --frozen-lockfile
 
       - name: Run Prettier Check
         id: prettier-run
         run: |
-          if pnpm prettier --check .; then
+          if npx prettier --check .; then
             echo "prettier_output=All files are formatted correctly" >> $GITHUB_OUTPUT
           else
             echo "prettier_output=Some files are not formatted correctly" >> $GITHUB_OUTPUT
@@ -39,10 +33,10 @@ jobs:
         shell: bash
         run: |
           echo "::error::The following files aren't formatted properly:"
-          pnpm prettier --check . || true
+          npx prettier --check . || true
           echo ""
           echo "To fix formatting issues, run:"
-          echo "  pnpm prettier --write ."
+          echo "  npx prettier --write ."
 
       - name: Format Output
         if: always()
