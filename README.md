@@ -1,153 +1,162 @@
-# Nyx Control
+# Nyx Mobile
 
-<div align="center">
-   <h1>🛡️ Nyx Control</h1>
-   <p><strong>Where Automation Meets Tranquility</strong></p>
-</div>
+## Mobile Browser Extension for AI Automation
 
-<p align="center">
-  A powerful browser extension that integrates Model Context Protocol (MCP) tools with 13+ AI platforms.
-</p>
+Nyx Mobile is a mobile-optimized version of the Nyx Control browser extension, designed for Firefox Mobile and other mobile browsers that support extensions. It provides the same powerful AI automation capabilities with a touch-friendly interface.
 
-<p align="center">
-   <a href="https://alsania-io.com/tools/nyx" target="_blank"><strong>🌐 Visit Official Website</strong></a>
-   &nbsp;·&nbsp;
-   <a href="https://github.com/alsania-dev/nyx" target="_blank"><strong>🐙 GitHub Repository</strong></a>
-</p>
+## Features
 
-<div align="center">
-  <img src="chrome-extension/public/Cover5.jpg" alt="Nyx Control Cover" width="800">
-</div>
+### Mobile-Optimized UI
+- **Touch-friendly interface** with 44px+ touch targets
+- **Slide-out sidebar** with smooth animations
+- **Floating action button** for quick access
+- **Bottom navigation** for easy tab switching
+- **Swipe to close** support
+- **Safe area support** for notched phones
 
-<div align="center">
-   ![Version](https://img.shields.io/badge/version-4.0.3-blue?style=flat-square)
-   ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
-   ![Status](https://img.shields.io/badge/Status-Active-success?style=flat-square)
-   ![Platforms](https://img.shields.io/badge/Platforms-Chrome%20%7C%20Edge%20%7C%20Firefox-orange?style=flat-square)
-</div>
+### Same Powerful Backend
+- Full MCP (Model Context Protocol) support
+- All AI platform integrations (ChatGPT, Claude, Gemini, etc.)
+- Tool execution and automation
+- Persistent memory and context
+- Push content mode
+- All existing features work exactly as before
 
----
+## Installation
 
-## 📖 Overview
+### Firefox Mobile
+1. Download the `.xpi` file from the release
+2. Open Firefox Mobile
+3. Navigate to `about:addons`
+4. Tap the gear icon → "Install Add-on From File"
+5. Select the downloaded `.xpi` file
 
-**Nyx Control** is a browser extension that integrates Model Context Protocol (MCP) tools with AI platforms like Perplexity, ChatGPT, Google Gemini, Google AI Studio, Grok, and more. It allows users to execute MCP tools directly from these platforms, enhancing the capabilities of web-based AI assistants.
+### Other Mobile Browsers
+- Kiwi Browser (Android): Supports Chrome extensions
+- Edge Canary: Supports some extensions
+- Check your browser's extension documentation
 
-Built by [Alsania I/O](https://alsania-io.com) — a sovereign technology ecosystem for creators, innovators, and visionaries.
+## Development
 
-## ✨ Currently Supported Platforms
-
-- [ChatGPT](https://chatgpt.com/)
-- [Google Gemini](https://gemini.google.com/)
-- [Perplexity](https://perplexity.ai/)
-- [Grok](https://grok.com/)
-- [Google AI Studio](https://aistudio.google.com/)
-- [OpenRouter Chat](https://openrouter.ai/chat)
-- [DeepSeek](https://chat.deepseek.com/)
-- [T3 Chat](https://t3.chat/)
-- [GitHub Copilot](https://github.com/copilot)
-- [Mistral AI](https://chat.mistral.ai/)
-- [Kimi](https://kimi.com/)
-- [Qwen Chat](https://chat.qwen.ai/)
-- [Z Chat](https://chat.z.ai/)
-
-## 🚀 Key Features
-
-- **🎯 Multiple AI Platforms**: Works with 13+ AI platforms
-- **🔍 Automatic Tool Detection**: Detects MCP tool calls in AI responses
-- **⚡ One-Click Execution**: Execute tools with a single click
-- **🤖 Auto-Execute Mode**: Automatic execution of detected tools
-- **🎨 Theme Support**: Adapts to dark/light modes
-- **💾 Persistent Settings**: Remembers preferences across sessions
-- **📦 Tool Result Integration**: Seamless insertion of results back into conversations
-
-## 🔧 What is MCP?
-
-The Model Context Protocol (MCP) is an open standard developed by Anthropic that connects AI assistants to systems where data actually lives, including content repositories, business tools, and development environments.
-
-## 📦 Installation
-
-### From Release Package
-1. Download the latest release from [GitHub Releases](https://github.com/alsania-dev/nyx/releases)
-2. Extract the package for your platform (Windows, macOS, or Linux)
-3. Load the extension in your browser:
-   - **Chrome/Edge**: Navigate to `chrome://extensions/` → Enable Developer Mode → Load Unpacked
-   - **Firefox**: Navigate to `about:debugging` → This Firefox → Load Temporary Add-on
-
-### From Source
-```bash
-# Clone the repository
-git clone https://github.com/alsania-dev/nyx.git
-cd nyx
-
-# Install dependencies
-pnpm install
-
-# Build the extension
-pnpm build
-
-# The extension will be in the Nyx-Control-v4.0.3 directory
+### Project Structure
+```
+nyx-mobile/
+├── addons/
+│   ├── mobile-sidebar-fix.js    # Mobile touch optimizations
+│   └── ... (other addons)
+├── content/
+│   └── mobile-sidebar-override.css
+├── pages/content/src/
+│   ├── components/sidebar/
+│   │   ├── MobileSidebar.tsx    # Mobile-optimized sidebar
+│   │   └── ...
+│   └── mobile-entry.ts          # Mobile detection & loading
+└── ...
 ```
 
-## 🔌 Connecting to MCP Server
+### Key Mobile Components
 
-1. Start your MCP proxy server:
-   ```bash
-   npx -y @alsania-io/mcpnyx@latest --config ./config.json --outputTransport sse
-   ```
+#### MobileSidebar.tsx
+Mobile-optimized sidebar with:
+- Slide-in panel from the right
+- Touch gesture support (swipe to close)
+- Larger touch targets
+- Bottom navigation tabs
+- Floating action button for opening
 
-2. Open Nyx Control sidebar in any supported AI platform
-3. Click the server status indicator
-4. Enter the server URL (default: `http://localhost:3055/sse`)
-5. Click "Connect"
+#### mobile-sidebar-fix.js
+Addon that provides:
+- Touch event optimizations
+- Mobile-specific CSS injection
+- Touch feedback animations
+- Double-tap zoom prevention
 
-## 🛠️ Development
+#### mobile-entry.ts
+Entry point that:
+- Detects mobile devices
+- Conditionally loads mobile sidebar
+- Falls back to desktop version if needed
 
-### Prerequisites
-- Node.js (v22.12.0+)
-- pnpm (v9.15.1+)
+## Building
 
-### Setup
 ```bash
 # Install dependencies
 pnpm install
 
-# Start development server
-pnpm dev
-
-# Build for production
+# Build for all browsers
 pnpm build
 
-# Create zip package
+# Build specifically for Firefox
+pnpm build:firefox
+
+# Create .zip/.xpi package
 pnpm zip
+pnpm zip:firefox
 ```
 
-## 🤝 Contributing
+## Differences from Desktop Version
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+### Changed
+- Sidebar slides in from the right instead of being always visible
+- Floating action button instead of always-visible sidebar toggle
+- Bottom navigation for tabs
+- Larger touch targets throughout
+- Swipe gestures for closing
+
+### Unchanged
+- All backend functionality
+- All AI platform integrations
+- Tool execution
+- Memory and context
+- Push content mode
+- Settings and preferences
+
+## Mobile Detection
+
+The extension automatically detects mobile devices based on:
+- User agent string
+- Screen size (< 768px)
+- Touch support
+
+## Browser Compatibility
+
+### Fully Supported
+- Firefox Mobile (Android)
+- Firefox for iOS (limited extension support)
+
+### Partial Support
+- Kiwi Browser (Android)
+- Edge Canary (Android)
+
+### Not Supported
+- Safari (no extension support on iOS)
+- Chrome Mobile (limited extension support)
+
+## Known Issues
+
+1. Some AI platforms may have mobile-specific UI differences
+2. Push content mode may behave differently on mobile layouts
+3. Very small screens (< 320px) may cause layout issues
+4. Some browsers may not support all extension APIs
+
+## Contributing
 
 1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
+2. Create a feature branch
+3. Make your changes
+4. Test on mobile devices
+5. Submit a pull request
 
-## 📝 License
+## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+MIT License - see LICENSE file for details
 
-## 🙏 Acknowledgments
+## Links
 
-- Inspired by the Model Context Protocol (MCP) by Anthropic
-- Built by the [Alsania I/O](https://alsania-io.com) team
-- Community contributions and support
+- [GitHub Repository](https://github.com/alsania-dev/nyx-mobile)
+- [Documentation](https://alsania-io.com/tools/nyx-mobile)
+- [Issues](https://github.com/alsania-dev/nyx-mobile/issues)
 
 ---
 
-<div align="center">
-  <p>Built with ❤️ by <a href="https://alsania-io.com">Alsania I/O</a></p>
-  <p>
-    <a href="https://alsania-io.com/tools/nyx">Website</a> ·
-    <a href="https://github.com/alsania-dev/nyx">GitHub</a> ·
-    <a href="https://alsania-io.com">Alsania</a>
-  </p>
-</div>
+**Built with ❤️ by Alsania I/O**
